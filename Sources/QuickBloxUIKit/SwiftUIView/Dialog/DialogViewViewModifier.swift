@@ -95,6 +95,7 @@ struct DialogHeaderToolbarContent: ToolbarContent {
                             .scaleEffect(dialogHeaderSettings.rightButton.scale)
                             .tint(dialogHeaderSettings.rightButton.color)
                             .padding(dialogHeaderSettings.rightButton.padding)
+							.frame(width: 44, height: 44)
                     }
                 }.frame(width: 44, height: 44)
             }
@@ -143,7 +144,7 @@ public struct DialogHeader: ViewModifier {
         .navigationBarHidden(settings.isHidden)
         .toolbarBackground(settings.backgroundColor,for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-    }
+	}
 }
 
 public struct TypingView: View {

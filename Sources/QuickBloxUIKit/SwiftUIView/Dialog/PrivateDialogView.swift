@@ -48,8 +48,10 @@ public struct PrivateDialogView<ViewModel: DialogViewModelProtocol>: View  {
         ZStack(alignment: .center) {
             settings.backgroundColor.ignoresSafeArea()
             dialogContentView()
+				.padding(.top, 8)
+				.padding(.bottom, 64)
         }
-    }
+   }
     
     @ViewBuilder
     private func dialogContentView() -> some View {
