@@ -59,7 +59,7 @@ where DialogItem == ViewModel.DialogItem, UserItem == ViewModel.UserItem {
         
         .disabled(viewModel.isProcessing == true)
         .if(viewModel.isProcessing == true) { view in
-            view.overlay() {
+            view.overlay {
                 CustomProgressView()
             }
         }

@@ -123,7 +123,7 @@ public struct DialogsView<ViewModel: DialogsListProtocol>: View {
             submittedSearchTerm: $submittedSearchTerm
         )
         .if(dialogsList.dialogToBeDeleted != nil) { view in
-            view.overlay() {
+            view.overlay {
                 CustomProgressView()
             }
         }

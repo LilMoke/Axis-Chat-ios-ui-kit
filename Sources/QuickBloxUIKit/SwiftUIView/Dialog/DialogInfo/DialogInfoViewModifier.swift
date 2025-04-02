@@ -188,47 +188,47 @@ public struct EditDialogAlert<ViewModel: PermissionProtocol>: ViewModifier {
                 .if((isIPad == true || isMac == true) && isPresented == true, transform: { view in
                     ZStack {
                         view.disabled(true)
-                            .overlay(
-                                VStack(spacing: 8) {
-                                    VStack {
-                                        ForEach(mediaPickerActions, id:\.self) { action in
-                                            MediaPickerSegmentView(action: action) { action in
-                                                switch action {
-                                                case .image:
-                                                    isMediaAlertPresented = true
-                                                case .name:
-                                                    isAlertNamePresented = true
-                                                default: print("default")
-                                                }
-                                            }
-                                            
-                                            if mediaPickerActions.last != action {
-                                                Divider()
-                                            }
-                                        }
-                                    }
-                                    .background(RoundedRectangle(cornerRadius: settings.cornerRadius).fill(settings.iPadBackgroundColor))
-                                    .frame(width: settings.buttonSize.width)
-                                    
-                                    VStack {
-                                        Button {
-                                            isPresented = false
-                                            isAlertNamePresented = false
-                                            isMediaAlertPresented = false
-                                        } label: {
-                                            
-                                            HStack {
-                                                Text(settings.cancel).foregroundColor(settings.iPadCancelColor)
-                                            }
-                                            .frame(width: settings.buttonSize.width, height: settings.buttonSize.height)
-                                        }
-                                    }
-                                    .background(RoundedRectangle(cornerRadius: settings.cornerRadius).fill(settings.iPadBackgroundColor))
-                                    .frame(width: settings.buttonSize.width)
-                                }
-                                    .frame(width: settings.buttonSize.width)
-                                    .shadow(color: settings.shadowColor.opacity(0.6), radius: settings.blurRadius)
-                            )
+							.overlay {
+								VStack(spacing: 8) {
+									VStack {
+										ForEach(mediaPickerActions, id:\.self) { action in
+											MediaPickerSegmentView(action: action) { action in
+												switch action {
+													case .image:
+														isMediaAlertPresented = true
+													case .name:
+														isAlertNamePresented = true
+													default: print("default")
+												}
+											}
+											
+											if mediaPickerActions.last != action {
+												Divider()
+											}
+										}
+									}
+									.background(RoundedRectangle(cornerRadius: settings.cornerRadius).fill(settings.iPadBackgroundColor))
+									.frame(width: settings.buttonSize.width)
+									
+									VStack {
+										Button {
+											isPresented = false
+											isAlertNamePresented = false
+											isMediaAlertPresented = false
+										} label: {
+											
+											HStack {
+												Text(settings.cancel).foregroundColor(settings.iPadCancelColor)
+											}
+											.frame(width: settings.buttonSize.width, height: settings.buttonSize.height)
+										}
+									}
+									.background(RoundedRectangle(cornerRadius: settings.cornerRadius).fill(settings.iPadBackgroundColor))
+									.frame(width: settings.buttonSize.width)
+								}
+								.frame(width: settings.buttonSize.width)
+								.shadow(color: settings.shadowColor.opacity(0.6), radius: settings.blurRadius)
+							}
                     }
                 })
             

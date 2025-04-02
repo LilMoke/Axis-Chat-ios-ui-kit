@@ -138,7 +138,7 @@ struct InputView: View  {
                 })
                 
                 .if(isRecordState == true) { view in
-                    view.overlay() {
+                    view.overlay {
                         HStack {
                             textFieldSettings.timer.image
                                 .foregroundColor(textFieldSettings.timer.imageColor)

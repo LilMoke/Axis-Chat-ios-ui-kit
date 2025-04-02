@@ -488,16 +488,16 @@ struct PreviewContextViewModifier<Preview: View>: ViewModifier {
     public func body(content: Content) -> some View {
         ZStack {
             content
-                .overlay(
-                    CustomPreviewContextMenuView(
-                        preview: preview,
-                        preferredContentSize: preferredContentSize,
-                        actions: actions,
-                        isActive: $isActive
-                    )
-                    .background(Color.clear)
-                    .blendMode(.destinationOver)
-                )
+				.overlay {
+					CustomPreviewContextMenuView(
+						preview: preview,
+						preferredContentSize: preferredContentSize,
+						actions: actions,
+						isActive: $isActive
+					)
+					.background(Color.clear)
+					.blendMode(.destinationOver)
+				}
         }
     }
     

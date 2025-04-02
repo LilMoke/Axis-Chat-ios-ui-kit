@@ -80,7 +80,7 @@ public struct GroupDialogNonEditInfoView<ViewModel: DialogInfoProtocol>: View {
             
             .disabled(viewModel.isProcessing == true)
             .if(viewModel.isProcessing == true) { view in
-                view.overlay() {
+                view.overlay {
                     CustomProgressView()
                 }
             }

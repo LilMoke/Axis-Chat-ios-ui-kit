@@ -180,57 +180,57 @@ public struct CustomMediaAlert<ViewModel: PermissionProtocol>: ViewModifier {
                 })
             
                 .if((isIPad == true || isMac == true) && isAlertPresented == true, transform: { view in
-                    ZStack {
-                        view.disabled(true)
-                            .overlay(
-                                VStack(spacing: 8) {
-                                    VStack {
-                                        ForEach(mediaPickerActions, id:\.self) { action in
-                                            MediaPickerSegmentView(action: action) { action in
-                                                switch action {
-                                                case .removePhoto:
-                                                    onRemoveImage()
-                                                    defaultState()
-                                                case .camera:
-                                                    viewModel.requestPermission(AVMediaType.video) { granted in
-                                                        if granted {
-                                                            isCameraPresented = true
-                                                        }
-                                                    }
-                                                case .photo:
-                                                    isImagePickerPresented = true
-                                                case .file:
-                                                    isFilePresented = true
-                                                default: print("default")
-                                                }
-                                            }
-                                            
-                                            if mediaPickerActions.last != action {
-                                                Divider()
-                                            }
-                                        }
-                                    }
-                                    .background(RoundedRectangle(cornerRadius: settings.cornerRadius).fill(settings.iPadBackgroundColor))
-                                    .frame(width: settings.buttonSize.width)
-                                    
-                                    VStack {
-                                        Button {
-                                            defaultState()
-                                        } label: {
-                                            
-                                            HStack {
-                                                Text(settings.cancel).foregroundColor(settings.iPadImageColor)
-                                            }
-                                            .frame(width: settings.buttonSize.width, height: settings.buttonSize.height)
-                                        }
-                                    }
-                                    .background(RoundedRectangle(cornerRadius: settings.cornerRadius).fill(settings.iPadBackgroundColor))
-                                    .frame(width: settings.buttonSize.width)
-                                }
-                                    .frame(width: settings.buttonSize.width)
-                                    .shadow(color: settings.shadowColor.opacity(0.6), radius: settings.blurRadius)
-                            )
-                    }
+					ZStack {
+						view.disabled(true)
+							.overlay {
+								VStack(spacing: 8) {
+									VStack {
+										ForEach(mediaPickerActions, id:\.self) { action in
+											MediaPickerSegmentView(action: action) { action in
+												switch action {
+													case .removePhoto:
+														onRemoveImage()
+														defaultState()
+													case .camera:
+														viewModel.requestPermission(AVMediaType.video) { granted in
+															if granted {
+																isCameraPresented = true
+															}
+														}
+													case .photo:
+														isImagePickerPresented = true
+													case .file:
+														isFilePresented = true
+													default: print("default")
+												}
+											}
+											
+											if mediaPickerActions.last != action {
+												Divider()
+											}
+										}
+									}
+									.background(RoundedRectangle(cornerRadius: settings.cornerRadius).fill(settings.iPadBackgroundColor))
+									.frame(width: settings.buttonSize.width)
+									
+									VStack {
+										Button {
+											defaultState()
+										} label: {
+											
+											HStack {
+												Text(settings.cancel).foregroundColor(settings.iPadImageColor)
+											}
+											.frame(width: settings.buttonSize.width, height: settings.buttonSize.height)
+										}
+									}
+									.background(RoundedRectangle(cornerRadius: settings.cornerRadius).fill(settings.iPadBackgroundColor))
+									.frame(width: settings.buttonSize.width)
+								}
+								.frame(width: settings.buttonSize.width)
+								.shadow(color: settings.shadowColor.opacity(0.6), radius: settings.blurRadius)
+							}
+					}
                 })
             
                 .imagePicker(isCameraPresented: $isCameraPresented,

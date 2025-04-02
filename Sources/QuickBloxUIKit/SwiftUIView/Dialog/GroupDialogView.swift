@@ -56,7 +56,8 @@ public struct GroupDialogView
         ZStack(alignment: .center) {
             settings.backgroundColor.ignoresSafeArea()
             dialogContentView()
-        }
+				.padding(.bottom, 60)
+       }
     }
     
     @ViewBuilder
