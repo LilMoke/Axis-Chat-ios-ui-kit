@@ -59,9 +59,9 @@ struct DialogTypeView: View {
                 .if((isIPad == true || isMac == true)) { view in
                     view.sheet(isPresented: $presentCreateDialog, content: {
                         createDialogView()
-                            .onDisappear {
-                                self.selectedSegment = nil
-                            }
+//                            .onDisappear {
+//                                self.selectedSegment = nil
+//                            }
                     })
                 }
             

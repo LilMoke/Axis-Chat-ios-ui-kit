@@ -10,47 +10,54 @@ import SwiftUI
 import QuickBloxDomain
 
 public struct DialogTypeBar {
-    var barSettings = QuickBloxUIKit.settings.dialogTypeScreen.dialogTypeBar
-    
-    @Binding public var selectedSegment: DialogType?
+	var barSettings = QuickBloxUIKit.settings.dialogTypeScreen.dialogTypeBar
+	
+	@Binding public var selectedSegment: DialogType?
+	
+	public var onSelect: ((DialogType) -> Void)? = nil // ✅ new
 }
 
 extension DialogTypeBar: View {
-    public var body: some View {
-        HStack(spacing: barSettings.spacing) {
-            ForEach(barSettings.displayedTypes, id:\.self) { type in
-                Segment(selectedSegment: $selectedSegment, type: type)
-            }
-        }
-        .frame(height: barSettings.height)
-        .background(barSettings.backgroundColor)
-    }
+	public var body: some View {
+		HStack(spacing: barSettings.spacing) {
+			ForEach(barSettings.displayedTypes, id:\.self) { type in
+				Segment(selectedSegment: $selectedSegment, type: type) {
+					onSelect?(type) // ✅ notify parent
+				}
+			}
+		}
+		.frame(height: barSettings.height)
+		.background(barSettings.backgroundColor)
+	}
 }
 
 public struct Segment: View {
-    var barSettings = QuickBloxUIKit.settings.dialogTypeScreen.dialogTypeBar
-    
-    @Binding public var selectedSegment: DialogType?
-    
-    public var type: DialogType
-    
-    public var body: some View {
-        ZStack {
-            Rectangle().fill(barSettings.backgroundColor)
-        }
-        .overlay (
-            Button {
-                selectedSegment = type
-            } label: {
-                VStack(spacing: barSettings.segmentSpacing) {
-                    type.settings.image.foregroundColor(type.settings.color)
-                    Text(type.settings.title)
-                        .font(type.settings.font)
-                        .foregroundColor(type.settings.color)
-                }
-            }.background(barSettings.backgroundColor)
-        )
-    }
+	var barSettings = QuickBloxUIKit.settings.dialogTypeScreen.dialogTypeBar
+	
+	@Binding public var selectedSegment: DialogType?
+	
+	public var type: DialogType
+	public var onTap: () -> Void // ✅ new
+	
+	public var body: some View {
+		ZStack {
+			Rectangle().fill(barSettings.backgroundColor)
+		}
+		.overlay(
+			Button {
+				selectedSegment = type
+				onTap() // ✅ callback when tapped
+			} label: {
+				VStack(spacing: barSettings.segmentSpacing) {
+					type.settings.image.foregroundColor(type.settings.color)
+					Text(type.settings.title)
+						.font(type.settings.font)
+						.foregroundColor(type.settings.color)
+				}
+			}
+				.background(barSettings.backgroundColor)
+		)
+	}
 }
 
 private extension DialogType {
