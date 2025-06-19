@@ -1,3 +1,11 @@
+//
+//  RosterManager.swift
+//  QuickBloxUIKit
+//
+//  Created by Tony Scamurra on 6/19/25.
+//  Copyright © 2025 Tony Scamurra. All rights reserved.
+//
+
 import Foundation
 import Quickblox
 import Combine
