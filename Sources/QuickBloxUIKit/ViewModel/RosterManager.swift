@@ -11,7 +11,7 @@ import Quickblox
 import Combine
 
 public final class RosterManager: NSObject, ObservableObject {
-    @Published var pendingRequests: [UInt] = []
+	@Published public var pendingRequests: [UInt] = []
 
 	override init() {
 		super.init()
