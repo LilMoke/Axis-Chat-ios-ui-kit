@@ -28,7 +28,10 @@ where DialogItem == ViewModel.DialogItem, UserItem == ViewModel.UserItem {
         _isPresented = isPresented
     }
     
-    public var body: some View {
+    @EnvironmentObject var rosterManager: RosterManager
+    @State private var showBlockedAlert = false
+
+    var body: some View {
         if isIphone {
             container()
                 .onViewDidLoad {
@@ -67,7 +70,16 @@ where DialogItem == ViewModel.DialogItem, UserItem == ViewModel.UserItem {
         .modifier(CreateDialogHeader(onDismiss: {
             isPresented = false
         }, onTapCreate: {
-            viewModel.createDialog()
+            
+			rosterManager.getApprovedContactIDs { approved in
+				let allApproved = viewModel.selected.allSatisfy {
+					if let idUInt = UInt($0.id) {
+						return approved.contains(idUInt)
+					}
+					return false
+				}
+			}
+
         }, disabled: viewModel.isProcessing == true))
     }
 }

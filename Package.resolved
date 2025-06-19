@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/QuickBlox/ios-ai-rephrase.git",
       "state" : {
-        "revision" : "cd21f2fe32f57b2a1208d30eb6f67fd4bbb28486",
-        "version" : "2.1.0"
+        "revision" : "dbe7875bb2bb647b9afaa4f71d807095402fa7b5",
+        "version" : "2.2.0"
       }
     },
     {
