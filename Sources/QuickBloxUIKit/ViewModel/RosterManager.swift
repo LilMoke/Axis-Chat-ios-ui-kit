@@ -2,7 +2,7 @@ import Foundation
 import Quickblox
 import Combine
 
-final class RosterManager: NSObject, ObservableObject {
+public final class RosterManager: NSObject, ObservableObject {
     @Published var pendingRequests: [UInt] = []
 
 	override init() {
@@ -55,18 +55,18 @@ final class RosterManager: NSObject, ObservableObject {
 }
 
 extension RosterManager: QBChatDelegate {
-    func chatDidReceiveContactAddRequest(fromUser userID: UInt) {
+	public func chatDidReceiveContactAddRequest(fromUser userID: UInt) {
         print("📥 Received chat request from \(userID)")
         if !pendingRequests.contains(userID) {
             pendingRequests.append(userID)
         }
     }
 
-    func chatDidReceiveAcceptContactRequest(fromUser userID: UInt) {
+	public func chatDidReceiveAcceptContactRequest(fromUser userID: UInt) {
         print("✅ Your request was accepted by \(userID)")
     }
 
-    func chatDidReceiveRejectContactRequest(fromUser userID: UInt) {
+	public func chatDidReceiveRejectContactRequest(fromUser userID: UInt) {
         print("❌ Your request was rejected by \(userID)")
     }
 }
